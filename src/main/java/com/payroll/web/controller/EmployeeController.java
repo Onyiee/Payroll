@@ -1,13 +1,14 @@
 package com.payroll.web.controller;
 
+import com.payroll.data.dto.EmployeeDto;
 import com.payroll.data.model.Employee;
 import com.payroll.service.employee.EmployeeService;
 import com.payroll.web.exceptions.EmployeeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,8 +25,8 @@ public class EmployeeController {
     }
 
     @PostMapping("")
-    public Employee save(@RequestBody Employee employee) {
-        return employeeService.save(employee);
+    public Employee save(@RequestBody EmployeeDto employeeDto) {
+        return employeeService.save(employeeDto);
     }
 
     @GetMapping("/{id}")
@@ -46,5 +47,11 @@ public class EmployeeController {
         } catch (EmployeeException e) {
             log.info(e.getMessage());
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public Employee updateEmployee(@PathVariable Integer id,
+                                   @Valid @RequestBody EmployeeDto employeeDto){
+        return null;
     }
 }
